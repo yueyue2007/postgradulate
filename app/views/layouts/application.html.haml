@@ -2,10 +2,17 @@
 %html
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title Postgradulate
+    %title  中共湖南省委党校（湖南行政学院）硕士研究生管理系统
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
+    = render 'layouts/shim'
   %body
-
-    = yield
+    = render 'layouts/header'
+    .container
+      - flash.each do |key,value|
+        .alert
+          = value
+      = yield
+      = render 'layouts/footer'
+      = debug(params) if Rails.env.development?
