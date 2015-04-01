@@ -10,7 +10,7 @@ class CreateUsers < ActiveRecord::Migration
 
 
       #t.index :grade
-      t.index :stuno
+      t.index :stuno,unique:true
     end
   end
 end

@@ -73,6 +73,6 @@ ActiveRecord::Schema.define(version: 20150401142415) do
     t.integer  "grade_id"
   end
 
-  add_index "users", ["stuno"], name: "index_users_on_stuno"
+  add_index "users", ["stuno"], name: "index_users_on_stuno", unique: true
 
 end
