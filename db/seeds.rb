@@ -5,6 +5,10 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+Admin.delete_all
+admin = Admin.create(email:"admin@hnswdx.gov.cn",password:"1Qaz3edc")
+
 Grade.delete_all
 grades = Grade.create([{name:"2014级法学",description:"2014 年入学"},\
                        {name:"2015级马克思主义",description:"2015年入学"},\
