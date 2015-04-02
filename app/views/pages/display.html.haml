@@ -1,0 +1,58 @@
+.container
+  .row
+    .title
+      %h2
+        = @user.name
+        = "基本情况一览表"
+  .row
+    .col-md-2
+      = "姓名:  "
+      = @user.name
+    .col-md-2
+      ="学号： "
+      =@user.stuno
+    .col-md-2
+      ="专业"
+      =@user.major
+    .col-md-2
+      ="年级"
+      =@user.grade.name
+  .row
+    .col-md-12
+      = "课程成绩"
+    .col-md-12
+      -@user.scores.each  do |score|
+        .col-md-2
+          =score.course.name
+          =score.course_score
+  .row
+    .col-md-12
+      ="科研成果"
+    .col-md-12
+      .col-md-2
+        = "文章标题"
+      .col-md-2
+        = "发表刊物"
+      .col-md-2
+        = "是否独著"
+      .col-md-2
+        = "出版时间"
+      .col-md-2
+        = "字数"
+      .col-md-2
+        = "合著第几作者"
+    -@user.researches.each do |research|
+      .col-md-12
+        .col-md-2
+          =research.title
+        .col-md-2
+          =research.magazine
+        .col-md-2
+          =research.self_write
+        .col-md-2
+          =research.publish_time
+        .col-md-2
+          =research.words_count
+        .col-md-2
+          =research.title
+

@@ -1,0 +1,17 @@
+.span12
+  .group
+    = link_to "建立课程",new_course_path,:class =>"btn btn-mini btn-primary pull-right"
+  %table
+    %thead
+      %tr
+        %td= "#  "
+        %td 课程名称
+        %td 授课老师
+    %tbody
+      - @courses.each do |course|
+        %tr
+          %td= "#  "
+          %td= link_to course.name, course_path(course)
+          %td= course.teacher
+          %td= link_to "编辑",edit_course_path(course),:class =>"btn btn-mini"
+          %td= link_to "删除",course_path(course),:class =>"btn btn-mini",:method => :delete, :confirm => "确定要删除该课程？"

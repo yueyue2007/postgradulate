@@ -1,0 +1,8 @@
+.span12
+  .group
+    = link_to "编辑",edit_course_path(@course),:class =>"btn btn-mini btn-primary pull-right "
+
+  %h2= @course.name
+  %p
+    = "授课老师： "
+    = @course.teacher

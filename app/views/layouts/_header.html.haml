@@ -1,11 +1,16 @@
-%header{:class =>"navbar navbar-fixed-top"}
+%header{:class =>"navbar navbar-default"}
   .navbar-inner
     .container
       = link_to "sample app","#",id:"logo"
     .title
       中共湖南省委党校（湖南行政学院）硕士研究生管理系统
       %nav
-        %ul{:class =>"nav pull-right"}
-          %li= link_to "Home", "#"
-          %li= link_to "Help","#"
-          %li= link_to "Sign in","#"
+        %ul{:class =>"nav navbar-nav "}
+          %li= link_to "主页", root_path
+          - if current_admin.blank?
+            %li= link_to " 管理员登陆",new_admin_session_path
+          - else
+            %li= link_to "管理员注销",destroy_admin_session_path,:method =>:delete
+            %li= link_to "班级管理",grades_path
+            %li= link_to "课程管理",courses_path
+            %li= link_to "统计查询","#"

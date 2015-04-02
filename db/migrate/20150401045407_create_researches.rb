@@ -6,6 +6,7 @@ class CreateResearches < ActiveRecord::Migration
       t.boolean :self_write
       t.string :publish_time
       t.integer :words_count
+      t.string :author
 
       t.belongs_to :user
 

@@ -1,0 +1,17 @@
+.span12
+  .group
+    = link_to "建立班级",new_grade_path,:class =>"btn btn-mini btn-primary pull-right"
+  %table
+    %thead
+      %tr
+        %td= "#"
+        %td 班级名称
+        %td 描述
+    %tbody
+      - @grades.each do |grade|
+        %tr
+          %td= "#"
+          %td= link_to grade.name, grade_path(grade)
+          %td= grade.description
+          %td= link_to "编辑",edit_grade_path(grade),:class =>"btn btn-mini"
+          %td= link_to "删除",grade_path(grade),:class =>"btn btn-mini",:method => :delete, :confirm => "确定要删除该班级？"

@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20150401142415) do
     t.boolean  "self_write"
     t.string   "publish_time"
     t.integer  "words_count"
+    t.string   "author"
     t.integer  "user_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false

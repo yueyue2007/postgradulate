@@ -1,1 +1,16 @@
-%h1 研究生资料查询页面
+.container
+  .row
+    .col_md_4
+      %br
+      %br
+      %h2 请输入姓名和学号进行查询
+    .col_md_4
+      = form_tag 'pages/display' do
+        .form-group
+          = label_tag :stuno, "学号"
+          = text_field_tag :stuno
+          %br
+          = label_tag :name," 姓名"
+          = text_field_tag :name
+          %br
+          = submit_tag "查询"

@@ -1,0 +1,8 @@
+.span12
+  .group
+    = link_to "编辑",edit_grade_path(@grade),:class =>"btn btn-mini btn-primary pull-right "
+
+  %h2= @grade.name
+  %p
+    = "班级资料： "
+    = @grade.description

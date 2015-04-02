@@ -18,7 +18,17 @@ Course.delete_all
 courses = Course.create([{name:"法学概论",teacher:"吴教授"},\
                         {name:"英语阅读",teacher:"张老师"},\
                         {name:"马克思主义概论",teacher:"李老师"},\
-                        {name:"科学社会主义",teacher:"洪教授"}])
+                        {name:"科学社会主义",teacher:"洪教授"},\
+                        {name:"中国文艺",teacher:"李教授"},\
+                        {name:"大众电影",teacher:"李教授"},\
+                        {name:"数据结构",teacher:"陈老师"},\
+                        {name:"编译原理",teacher:"马老师"},\
+                        {name:"电子技术",teacher:"商老师"},\
+                        {name:"歌曲欣赏",teacher:"高老师"},\
+                        {name:"公务员修养",teacher:"关老师"},\
+                        {name:"军事纵横",teacher:"徐教授"},\
+                        {name:"纪委工作",teacher:"王院士"},\
+                        {name:"综合国情",teacher:"任老师"}])
 User.delete_all
 user1 = User.create({name:"李世民",stuno:"20140002",major:"法学"})
 user1.grade = Grade.first
@@ -36,11 +46,9 @@ r2.user = user2
 r2.save!
 
 Score.delete_all
-score1 = Score.new
-score1.user = user1
-score1.course = Course.first
-score1.course_score = "78"
-score1.save!
+(1..13).each do |i|
+  Score.create(user:user1,course:courses[i],course_score:"87")
+end
 
 
 
