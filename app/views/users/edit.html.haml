@@ -1,0 +1,7 @@
+.span12
+  = simple_form_for [@grade,@user] do |f|
+    = f.input :stuno, :label =>"学号",:input_html => {:class =>"input-xxlarge"}
+    = f.input :name, :label =>"姓名",:input_html => {:class =>"input-xxlarge"}
+    = f.input :major,:label =>"专业",:input_html => {:class =>"input-xxlarge"}
+    .form-actions
+      = f.submit "更新",:disable_with => "更新中...",:class =>"btn btn-primary"

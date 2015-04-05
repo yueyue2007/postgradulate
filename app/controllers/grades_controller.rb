@@ -41,6 +41,7 @@ class GradesController < ApplicationController
 
   def show
     #@grade = Grade.find(params[:id])
+    @users = @grade.users 
   end
 
   private

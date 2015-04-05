@@ -1,8 +1,23 @@
 .span12
-  .group
-    = link_to "编辑",edit_grade_path(@grade),:class =>"btn btn-mini btn-primary pull-right "
+  .group.pull-right
+    = link_to "编辑",edit_grade_path(@grade),:class =>"btn btn-mini"
+    =link_to "添加学生",new_grade_user_path(@grade), :class =>"btn btn-mini btn-primary "
 
   %h2= @grade.name
   %p
     = "班级资料： "
     = @grade.description
+
+  %table
+    %tbody
+      - @users.each do |user|
+        %tr
+          %td= user.stuno
+          %td= user.name
+          %td= link_to "编辑",edit_grade_user_path(user.grade,user),:class =>"btn btn-mini"
+          %td= link_to "删除",grade_user_path(user.grade,user),:class =>"btn btn-mini", :method => :delete, :confirm => "确定要删除该学生？"
+          %td= link_to "考试成绩","#",:class =>"btn btn-mini"
+          %td= link_to "科研情况","#",:class =>"btn btn-mini"
+
+
+

@@ -15,3 +15,4 @@
           %td= grade.description
           %td= link_to "编辑",edit_grade_path(grade),:class =>"btn btn-mini"
           %td= link_to "删除",grade_path(grade),:class =>"btn btn-mini",:method => :delete, :confirm => "确定要删除该班级？"
+          %td= link_to "班级成员",grade_path(grade),:class =>"btn btn-mini"
