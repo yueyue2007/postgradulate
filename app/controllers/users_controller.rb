@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :find_grade,except: :show 
+  before_action :find_grade #,except: :show
   before_action :login_required 
 
   def new
@@ -41,7 +41,7 @@ class UsersController < ApplicationController
   end
 
   def show 
-    
+    @user = @grade.users.find(params[:id])
   end
 
   private

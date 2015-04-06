@@ -1,1 +1,39 @@
-%p 显示学生的所有资料
+.container
+  .row
+    学生姓名
+    = @user.name
+    %br
+    学号
+    = @user.stuno
+    %br
+  .row
+    %p= "考试成绩列表"
+    - @user.scores.each do |score|
+      = score.course.name
+      = score.course_score
+      = link_to "编辑","#"
+      = link_to "删除", "#"
+      %br
+  .row
+
+  .row
+    %p= "科研情况列表"
+    %table
+      %thead
+        %tr
+          %td= "文章标题"
+          %td= "发表期刊"
+          %td= "是否独著"
+          %td= "发表时间"
+          %td= "是否第一作者"
+      %tbody
+        - @user.researches.each do |research|
+          %tr
+            %td= research.title
+            %td= research.magazine
+            %td= research.self_write
+            %td= research.publish_time
+            %td= research.author
+            %td= link_to "编辑","#"
+            %td= link_to "删除","#"
+
