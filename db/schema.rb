@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 20150401142415) do
     t.datetime "updated_at",   null: false
   end
 
-  create_table "scores", id: false, force: :cascade do |t|
+  create_table "scores", force: :cascade do |t|
     t.integer  "user_id",      null: false
     t.integer  "course_id",    null: false
     t.string   "course_score"

@@ -40,7 +40,8 @@ class CoursesController < ApplicationController
   end
 
   def show
-
+    @score = Score.new
+    session[:course_id] = @course.id
   end
 
   private

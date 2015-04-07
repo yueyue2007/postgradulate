@@ -1,6 +1,6 @@
 class CreateScores < ActiveRecord::Migration
   def change
-    create_table :scores,id:false  do |t|
+    create_table :scores  do |t|
       t.references :user,null:false
       t.references :course,null:false
       t.string :course_score

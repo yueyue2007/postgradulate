@@ -11,10 +11,17 @@
     - @user.scores.each do |score|
       = score.course.name
       = score.course_score
-      = link_to "编辑","#"
-      = link_to "删除", "#"
+      = link_to "编辑",edit_score_path(score)
+      = link_to "删除",score_path(score),:class =>"btn btn-mini",:method => :delete, :confirm => "确定要删除该条目？"
       %br
   .row
+    = simple_form_for @score do |f|
+      = f.association :course,:label=>"课程"
+      = f.input :course_score,:label=>"成绩"
+      .form-actions
+        =f.submit "生成",:disable_with => "正在提交中...",:class =>"btn btn-primary "
+
+
 
   .row
     %p= "科研情况列表"
@@ -22,10 +29,10 @@
       %thead
         %tr
           %td= "文章标题"
-          %td= "发表期刊"
+          %td= "发表刊物"
           %td= "是否独著"
           %td= "发表时间"
-          %td= "是否第一作者"
+          %td= "合著第几作者"
       %tbody
         - @user.researches.each do |research|
           %tr
@@ -34,6 +41,18 @@
             %td= research.self_write
             %td= research.publish_time
             %td= research.author
-            %td= link_to "编辑","#"
-            %td= link_to "删除","#"
+            %td= link_to "编辑",edit_research_path(research)
+            %td= link_to "删除",research_path(research),:class =>"btn btn-mini",:method => :delete, :confirm => "确定要删除该条目？"
+  .row
+    =simple_form_for @research do |f|
+      =f.input :title,:label => "文章标题"
+      =f.input :magazine, :label=>"发表刊物"
+      =f.input :self_write,:label=>"是否独著"
+      =f.input :publish_time,:label=>"发表时间"
+      =f.input :words_count, :label=>"字数"
+      =f.input :author, :label=>"合著第几作者"
+
+
+      .form-actions
+        =f.submit "生成",:disable_with => "正在提交中...",:class =>"btn btn-primary "
 

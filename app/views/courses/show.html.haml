@@ -1,8 +1,29 @@
 .span12
   .group
-    = link_to "编辑",edit_course_path(@course),:class =>"btn btn-mini btn-primary pull-right "
+    = link_to "批量输入","#",:class =>"btn btn-mini btn-primary pull-right "
+    = link_to "修改","#",:class =>"btn btn-mini btn-primary pull-right "
 
-  %h2= @course.name
-  %p
-    = "授课老师： "
-    = @course.teacher
+  %h2
+    =  @course.name
+    成绩单
+  .table
+    %table
+      %thead
+        %tr
+          %td 学号
+          %td 姓名
+          %td 成绩
+      %tbody
+        - if @course.scores.size > 0
+          - @course.scores.each do |score|
+            %tr
+              %td= score.user.stuno
+              %td= score.user.name
+              %td= score.course_score
+  .row
+    =simple_form_for @score do |f|
+      =f.association :user
+      =f.input :course_score
+
+      .form-actions
+        =f.submit "生成",:disable_with => "正在提交中...",:class =>"btn btn-primary "

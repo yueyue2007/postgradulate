@@ -42,6 +42,11 @@ class UsersController < ApplicationController
 
   def show 
     @user = @grade.users.find(params[:id])
+    @score = Score.new
+    @research = Research.new
+    #@score.user = @user
+    #flash[:stuno] = "20120003"   #save the current user id
+    session[:stuno] = @user.stuno
   end
 
   private
