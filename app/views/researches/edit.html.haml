@@ -1,0 +1,13 @@
+.simple_form
+  =simple_form_for @research do |f|
+    =f.input :title,:label => "文章标题"
+    =f.input :magazine, :label=>"发表刊物"
+    =f.input :self_write,:label=>"是否独著"
+    =f.input :publish_time,:label=>"发表时间"
+    =f.input :words_count, :label=>"字数"
+    =f.input :author, :label=>"合著第几作者"
+
+
+    .form-actions
+      =f.submit "更新",:class =>"btn btn-primary "
+
