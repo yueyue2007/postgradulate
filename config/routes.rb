@@ -12,6 +12,11 @@ Rails.application.routes.draw do
 
   resources :grades  do
     resources :users
+    member do
+      get :batch
+      post :batchupgrade
+    end
+
   end
   #resources :users
   resources :scores

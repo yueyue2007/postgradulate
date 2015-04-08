@@ -55,3 +55,6 @@ gem 'erb2haml'
 gem 'magic_encoding'
 gem 'devise'
 
+gem 'nested_form'
+gem 'activerecord-import'
+

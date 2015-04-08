@@ -1,6 +1,7 @@
-.span12
+.row
   = simple_form_for @course do |f|
     = f.input :name, :label =>"课程名称",:input_html => {:class => "input-xxlarge"}
     = f.input :teacher,:label =>"授课老师", :input_html => {:class => "input-xxlarge"}
+
     .form-actions
       =f.submit "更新",:disable_with => "正在提交中...",:class =>"btn btn-primary "

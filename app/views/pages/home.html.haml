@@ -1,16 +1,16 @@
 .container
   .row
-    .col_md_4
-      %br
-      %br
-      %h2 请输入姓名和学号进行查询
-    .col_md_4
+    .col-md-12
+      %h3 请输入姓名和学号进行查询
+  .row
+    .col-md-4
+    .col-md-4
       = form_tag 'pages/display' do
         .form-group
           = label_tag :stuno, "学号"
           = text_field_tag :stuno
-          %br
+        .form-group
           = label_tag :name," 姓名"
           = text_field_tag :name
-          %br
-          = submit_tag "查询"
+        %br
+        = submit_tag "查询",:class =>"btn btn-primary"
