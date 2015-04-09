@@ -1,16 +1,21 @@
 .container
   .row
     .col-md-12
-      %h3="学生资料批量录入"
+      %h3
+        = @grade2.name
+        = "学生资料批量录入"
   .row
-    .col-md-3
+    .col-md-2
     .col-md-8
       =simple_form_for @grade.with_blank_users(2),:url =>batchupgrade_grade_path(@grade2) do |f|
-
         =f.simple_fields_for :users do |user_form|
-          = user_form.input :stuno,:label =>"学号"
-          = user_form.input :name
-          = user_form.input :major
-          %br
+          .row
+            .input-field-batch
+              = user_form.input :stuno,:label =>"学号",:required => "false",:input_html => {:class => "input-xxlarge"}
+            .input-field-batch
+              = user_form.input :name,:label =>"姓名",:required => "false",:input_html => {:class => "input-xxlarge"}
+            .input-field-batch
+              = user_form.input :major,:label => "专业",:input_html => {:class => "input-xxlarge"}
 
-        =f.submit "提交"
+        %br
+        =f.submit "批量提交",:class =>"btn btn-primary"

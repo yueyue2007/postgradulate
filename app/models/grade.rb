@@ -3,7 +3,7 @@ class Grade < ActiveRecord::Base
 
   validates :name,presence: true
 
-  accepts_nested_attributes_for :users
+  accepts_nested_attributes_for :users , :reject_if => lambda {|attrs| attrs.all? {|key,value| value.blank?}}
 
   def with_blank_users(n = 5)
     n.times do

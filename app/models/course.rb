@@ -3,9 +3,9 @@ class Course < ActiveRecord::Base
   has_many :users, :through => :scores
   validates :name,presence: true
 
-  accepts_nested_attributes_for :scores,:allow_destroy => true
+  accepts_nested_attributes_for :scores , :reject_if => lambda {|attrs| attrs.all? {|key,value| value.blank?}}
 
-  def with_blank_scores(n=10)
+  def with_blank_scores(n=5)
     n.times do
       scores.build
     end

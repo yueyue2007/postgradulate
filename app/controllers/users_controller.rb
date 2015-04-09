@@ -49,6 +49,25 @@ class UsersController < ApplicationController
     session[:stuno] = @user.stuno
   end
 
+  def batch
+    @user2 = @grade.users.find(params[:id])
+    @user = User.new
+  end
+
+  def batchupgrade
+    @user = @grade.users.find(params[:id])
+    #byebug
+    if @user.update(user_params)
+      flash[:success] = "批量输入成功!"
+      redirect_to grade_user_path(@grade,@user)
+    else
+      flash[:error] = "批量输入不成功，请检查是否重复？。"
+      @user2 = @user
+      @user = User.new
+      render :batch
+    end
+  end
+
   private
 
   def find_grade
@@ -56,6 +75,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:stuno,:name,:major)
+    params.require(:user).permit(:stuno,:name,:major,researches_attributes: [:id,:title,:magazine,:self_write,:publish_time,:words_count,:author ])
   end
 end

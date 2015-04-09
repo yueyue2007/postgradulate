@@ -11,17 +11,27 @@ Rails.application.routes.draw do
   root 'pages#home'
 
   resources :grades  do
-    resources :users
+    resources :users do
+      member do
+        get :batch
+        post :batchupgrade
+      end
+    end
+
     member do
       get :batch
       post :batchupgrade
     end
-
   end
   #resources :users
   resources :scores
   resources :researches
-  resources :courses
+  resources :courses do
+    member do
+      post :batch
+      post :batchupgrade
+    end
+  end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

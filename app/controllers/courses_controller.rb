@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_action :find_course, only: [:edit,:show, :update,:destroy]
+  before_action :find_course, only: [:edit,:show, :update,:destroy,:batch,:batchupgrade]
   before_action :login_required
 
   def index
@@ -21,7 +21,6 @@ class CoursesController < ApplicationController
   end
 
   def edit
-
   end
 
   def update
@@ -44,10 +43,24 @@ class CoursesController < ApplicationController
     session[:course_id] = @course.id
   end
 
+  def batch
+    @grade = Grade.find(params[:grade])
+    unless @grade
+      flash[:error] = "请先选择班级！"
+      redirect_to course_path(@course)
+    end
+    @course2 = @course
+    @course = Course.new
+  end
+
+  def batchupgrade
+
+  end
+
   private
 
   def course_params
-    params.require(:course).permit(:name, :teacher,scores_attributes: [:id,:course_score,:_destroy])
+    params.require(:course).permit(:name, :teacher,scores_attributes: [:id,:user_id,:course_id,:course_score,:_destroy])
   end
 
   def find_course

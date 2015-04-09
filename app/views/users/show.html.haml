@@ -1,11 +1,16 @@
 .container
   .row
-    学生姓名
-    = @user.name
-    %br
-    学号
-    = @user.stuno
-    %br
+    .col-md-4
+      学生姓名
+      = @user.name
+      %br
+      学号
+      = @user.stuno
+    .col-md-8
+      .group.pull-right
+        = link_to "批量输入科研",batch_grade_user_path(@grade,@user),:class =>"btn btn-mini  btn-primary"
+        = link_to "批量输入成绩","#", :class =>"btn btn-mini btn-primary "
+      %br
   .row
     %p= "考试成绩列表"
     - @user.scores.each do |score|
@@ -15,11 +20,14 @@
       = link_to "删除",score_path(score),:class =>"btn btn-mini",:method => :delete, :confirm => "确定要删除该条目？"
       %br
   .row
-    = simple_form_for @score do |f|
-      = f.association :course,:label=>"课程"
-      = f.input :course_score,:label=>"成绩"
-      .form-actions
-        =f.submit "生成",:disable_with => "正在提交中...",:class =>"btn btn-primary "
+    .col-md-4
+      = simple_form_for @score do |f|
+        = f.association :course,:label=>"课程"
+        = f.input :course_score,:label=>"成绩"
+        .form-actions
+          =f.submit "生成",:disable_with => "正在提交中...",:class =>"btn btn-primary "
+
+    .col-md-8
 
 
 
@@ -44,15 +52,15 @@
             %td= link_to "编辑",edit_research_path(research)
             %td= link_to "删除",research_path(research),:class =>"btn btn-mini",:method => :delete, :confirm => "确定要删除该条目？"
   .row
-    =simple_form_for @research do |f|
-      =f.input :title,:label => "文章标题"
-      =f.input :magazine, :label=>"发表刊物"
-      =f.input :self_write,:label=>"是否独著"
-      =f.input :publish_time,:label=>"发表时间"
-      =f.input :words_count, :label=>"字数"
-      =f.input :author, :label=>"合著第几作者"
+    .col-md-4
+      =simple_form_for @research do |f|
+        =f.input :title,:label => "文章标题"
+        =f.input :magazine, :label=>"发表刊物"
+        =f.input :self_write,:label=>"是否独著"
+        =f.input :publish_time,:label=>"发表时间"
+        =f.input :words_count, :label=>"字数"
+        =f.input :author, :label=>"合著第几作者"
 
-
-      .form-actions
-        =f.submit "生成",:disable_with => "正在提交中...",:class =>"btn btn-primary "
+        .form-actions
+          =f.submit "生成",:disable_with => "正在提交中...",:class =>"btn btn-primary "
 

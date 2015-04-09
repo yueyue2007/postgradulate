@@ -1,7 +1,14 @@
-.span12
-  .group
-    = link_to "批量输入","#",:class =>"btn btn-mini btn-primary pull-right "
-    = link_to "修改","#",:class =>"btn btn-mini btn-primary pull-right "
+.container
+  .row
+    .col-md-9
+    .col-md-3
+      = form_tag batch_course_path(@course) do
+        = label_tag :grade," 选择班级"
+        = select_tag :grade, options_from_collection_for_select(Grade.all,:id,:name)
+        %br
+        %br
+        = submit_tag "批量输入成绩",:class =>"btn btn-primary"
+
 
   %h2
     =  @course.name

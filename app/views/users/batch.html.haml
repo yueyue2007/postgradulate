@@ -1,0 +1,32 @@
+.container
+  .row
+    .col-md-12
+      %h3
+        = @grade.name
+        = "---"
+        = @user2.name
+        = "科研资料批量录入"
+  .row
+    .col-md-1
+    .col-md-11
+      .row
+        =simple_form_for @user.with_blank_researches(2),:url =>batchupgrade_grade_user_path(@grade,@user2) do |f|
+          %table{:class =>"table table-bordered"}
+            %thead
+              %tr
+                %td= "文章标题"
+                %td= "发表刊物"
+                %td= "是否独著"
+                %td= "发表时间"
+                %td= "字数"
+                %td= "合著第几作者"
+            %tbody
+              =f.simple_fields_for :researches do |research_form|
+                %tr
+                  %td= research_form.input_field :title,:required => "false",:input_html => {:class => "input-xxlarge"}
+                  %td= research_form.input_field :magazine,:required => "false",:input_html => {:class => "input-xxlarge"}
+                  %td= research_form.input_field :self_write,:required => "false",:input_html => {:class => "input-xxlarge"}
+                  %td= research_form.input_field :publish_time,:required => "false",:input_html => {:class => "input-xxlarge"}
+                  %td= research_form.input_field :words_count,:input_html => {:class => "input-xxlarge"}
+                  %td= research_form.input_field :author,:input_html => {:class => "input-xxlarge"}
+          = f.submit "批量提交",:class =>"btn btn-primary"
