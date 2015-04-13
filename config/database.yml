@@ -21,5 +21,12 @@ test:
   database: db/test.sqlite3
 
 production:
-  <<: *default
-  database: db/production.sqlite3
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: postgradulate
+  pool: 5
+  username: post
+  password: '1Qaz3edc'
+ ## <<: *default
+ # database: db/production.sqlite3

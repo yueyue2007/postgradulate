@@ -35,13 +35,25 @@ class ScoresController < ApplicationController
     if @score.update(score_params)
       flash[:success] = "成功更新一门课程成绩！"
     end
-    redirect_to grade_user_path(@score.user.grade,@score.user)
+    if session[:stuno]
+      session[:stuno] = nil
+      redirect_to grade_user_path(@score.user.grade,@score.user)
+    else
+      redirect_to course_path(@score.course)
+    end
+
   end
 
   def destroy
     @score.destroy
     flash[:success] = "成功删除一门课程成绩！"
-    redirect_to grade_user_path(@score.user.grade,@score.user)
+    if session[:stuno]
+      session[:stuno] = nil
+      redirect_to grade_user_path(@score.user.grade,@score.user)
+    else
+      redirect_to course_path(@score.course)
+    end
+
   end
 
   private

@@ -4,7 +4,9 @@
     .col-md-3
       = form_tag batch_course_path(@course) do
         = label_tag :grade," 选择班级"
-        = select_tag :grade, options_from_collection_for_select(Grade.all,:id,:name)
+        -#= select_tag :grade, options_from_collection_for_select(Grade.all,:id,:name)
+        - grades_array = Grade.all.map {|grade| [grade.name,grade.id]}
+        =select_tag :grade,options_for_select([["请选择班级",0]] + grades_array)
         %br
         %br
         = submit_tag "批量输入成绩",:class =>"btn btn-primary"
@@ -20,6 +22,8 @@
           %td 学号
           %td 姓名
           %td 成绩
+          %td
+          %td
       %tbody
         - if @course.scores.size > 0
           - @course.scores.each do |score|
@@ -27,6 +31,8 @@
               %td= score.user.stuno
               %td= score.user.name
               %td= score.course_score
+              %td= link_to "编辑",edit_score_path(score)
+              %td= link_to "删除",score_path(score),:method => "delete"
   .row
     =simple_form_for @score do |f|
       =f.association :user

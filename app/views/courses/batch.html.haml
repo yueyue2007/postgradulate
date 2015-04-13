@@ -10,7 +10,25 @@
   .row
     .col-md-2
     .col-md-8
-      =form_for @course,:url => batchupgrade_course_path(@course2) do |f|
+      = simple_form_for(@course,:url => batchupgrade_course_path(@course2)) do |f|
+        %table{:class =>"table table-bordered"}
+          %thead
+            %tr
+              %td= "学号"
+              %td= "姓名"
+              %td= "成绩"
+          %tbody
+            = f.simple_fields_for :scores do |score_form|
+              %tr
+                = score_form.hidden_field :user_id
+                %td= score_form.input_field :user_stuno
+                %td= score_form.input_field :user_name
+                %td= score_form.input_field :course_score
+
+        =f.submit "提交成绩 "
+
+
+    -# =form_for @course,:url => batchupgrade_course_path(@course2) do |f|
         - @grade.users.each do |user|
           =f.fields_for :scores do |score_form|
             =score_form.text_field :course_score

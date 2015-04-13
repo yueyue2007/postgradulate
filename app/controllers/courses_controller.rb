@@ -41,20 +41,34 @@ class CoursesController < ApplicationController
   def show
     @score = Score.new
     session[:course_id] = @course.id
+    session[:stuno] = nil
   end
 
   def batch
-    @grade = Grade.find(params[:grade])
+    @grade = Grade.find_by_id(params[:grade])
+
     unless @grade
       flash[:error] = "请先选择班级！"
       redirect_to course_path(@course)
+    else
+      @course2 = @course
+      @course = Course.new
+      @grade.users.each do |user|
+        score =  @course.scores.build
+        score.user = user
+      end
     end
-    @course2 = @course
-    @course = Course.new
+
   end
 
   def batchupgrade
-
+    if @course.update(course_params)
+      flash[:success] = "批量输入成功!"
+      redirect_to course_path(@course)
+    else
+      flash[:error] = "批量输入不成功，请检查是否重复？。"
+      redirect_to course_path(@course)
+    end
   end
 
   private
