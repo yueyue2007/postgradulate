@@ -11,32 +11,34 @@
         %br
         = submit_tag "批量输入成绩",:class =>"btn btn-primary"
 
-
-  %h2
-    =  @course.name
-    成绩单
-  .table
-    %table
-      %thead
-        %tr
-          %td 学号
-          %td 姓名
-          %td 成绩
-          %td
-          %td
-      %tbody
-        - if @course.scores.size > 0
-          - @course.scores.each do |score|
-            %tr
-              %td= score.user.stuno
-              %td= score.user.name
-              %td= score.course_score
-              %td= link_to "编辑",edit_score_path(score)
-              %td= link_to "删除",score_path(score),:method => "delete"
   .row
-    =simple_form_for @score do |f|
-      =f.association :user
-      =f.input :course_score
+    .col-md-2
+    .col-md-8
+      %h2
+        =  @course.name
+        成绩单
+      .table
+        %table{:class =>"table table-bordered"}
+          %thead
+            %tr
+              %td 学号
+              %td 姓名
+              %td 成绩
+              %td
+              %td
+          %tbody
+            - if @scores.size > 0
+              - @scores.each do |score|
+                %tr
+                  %td= score.user.stuno
+                  %td= score.user.name
+                  %td= score.course_score
+                  %td= link_to "编辑",edit_score_path(score)
+                  %td= link_to "删除",score_path(score),:method => "delete"
+      .row
+        =simple_form_for @score do |f|
+          =f.association :user,:label => "学生姓名"
+          =f.input :course_score,:label => "成绩"
 
-      .form-actions
-        =f.submit "生成",:disable_with => "正在提交中...",:class =>"btn btn-primary "
+          .form-actions
+            =f.submit "生成",:disable_with => "正在提交中...",:class =>"btn btn-primary "

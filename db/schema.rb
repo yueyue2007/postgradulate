@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 20150401142415) do
   create_table "researches", force: :cascade do |t|
     t.string   "title"
     t.string   "magazine"
-    t.boolean  "self_write"
+    t.string   "self_write"
     t.string   "publish_time"
     t.integer  "words_count"
     t.string   "author"

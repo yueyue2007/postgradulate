@@ -7,7 +7,7 @@
   .row
     .col-md-2
     .col-md-8
-      =simple_form_for @grade.with_blank_users(2),:url =>batchupgrade_grade_path(@grade2) do |f|
+      =simple_form_for @grade.with_blank_users(10),:url =>batchupgrade_grade_path(@grade2) do |f|
         =f.simple_fields_for :users do |user_form|
           .row
             .input-field-batch

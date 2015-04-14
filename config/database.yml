@@ -28,5 +28,5 @@ production:
   pool: 5
   username: post
   password: '1Qaz3edc'
- ## <<: *default
+  #<<: *default
  # database: db/production.sqlite3

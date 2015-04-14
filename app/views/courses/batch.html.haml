@@ -10,6 +10,8 @@
   .row
     .col-md-2
     .col-md-8
+      .notice-batch
+        注意：必须要点击 “提交成绩” 按钮后，才可以关闭或离开本页。
       = simple_form_for(@course,:url => batchupgrade_course_path(@course2)) do |f|
         %table{:class =>"table table-bordered"}
           %thead
@@ -28,27 +30,3 @@
         =f.submit "提交成绩 "
 
 
-    -# =form_for @course,:url => batchupgrade_course_path(@course2) do |f|
-        - @grade.users.each do |user|
-          =f.fields_for :scores do |score_form|
-            =score_form.text_field :course_score
-
-        = f.submit "提交"
-    -#
-      =simple_form_for @course.with_blank_scores(@grade.users.length),:url =>batchupgrade_course_path(@course2) do |f|
-        %table{:class =>"table table-bordered"}
-          %thead
-            %tr
-              %td= "学号"
-              %td= "姓名"
-              %td= "课程"
-              %td= "成绩"
-          %tbody
-
-            =f.simple_fields_for :scores do |score_form|
-              %tr
-                %td= text_field_tag :user_id
-                %td= text_field_tag :
-                %td= ""
-                %td= score_form.input_field :course_score,:label => "成绩",:input_html => {:class => "input-xxlarge"}
-        = f.submit "批量提交",:class =>"btn btn-primary"

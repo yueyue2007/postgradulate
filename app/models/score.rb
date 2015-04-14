@@ -9,4 +9,5 @@ class Score < ActiveRecord::Base
   def user_name
     user.name
   end
+
 end

@@ -40,6 +40,7 @@ class CoursesController < ApplicationController
 
   def show
     @score = Score.new
+    @scores = @course.scores.sort_by{|x| x.user.stuno}
     session[:course_id] = @course.id
     session[:stuno] = nil
   end
@@ -53,8 +54,9 @@ class CoursesController < ApplicationController
     else
       @course2 = @course
       @course = Course.new
-      @grade.users.each do |user|
+      @grade.users.sort_by{|x| x.stuno}.each do |user|
         score =  @course.scores.build
+        score.course_score = user.score(@course2)  #若已经存在成绩，则取出并删除，删除在score函数中实现。
         score.user = user
       end
     end
@@ -62,6 +64,7 @@ class CoursesController < ApplicationController
   end
 
   def batchupgrade
+    # first delete all the score record of @course,@grade
     if @course.update(course_params)
       flash[:success] = "批量输入成功!"
       redirect_to course_path(@course)

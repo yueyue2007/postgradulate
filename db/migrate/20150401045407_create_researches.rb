@@ -3,7 +3,7 @@ class CreateResearches < ActiveRecord::Migration
     create_table :researches do |t|
       t.string :title
       t.string :magazine
-      t.boolean :self_write
+      t.string :self_write
       t.string :publish_time
       t.integer :words_count
       t.string :author

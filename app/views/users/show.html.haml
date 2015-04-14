@@ -1,58 +1,76 @@
 .container
   .row
-    .col-md-4
-      学生姓名
-      = @user.name
-      %br
-      学号
-      = @user.stuno
-    .col-md-8
-      .group.pull-right
-        = link_to "批量输入科研",batch_grade_user_path(@grade,@user),:class =>"btn btn-mini  btn-primary"
-        = link_to "批量输入成绩","#", :class =>"btn btn-mini btn-primary "
-      %br
+    .group.pull-right
+      = link_to "批量输入科研",batch_grade_user_path(@grade,@user),:class =>"btn btn-mini  btn-primary"
+
+    .title
+      %h2
+        = @user.name
+        = "基本情况一览表"
+        %br
   .row
-    %p= "考试成绩列表"
-    - @user.scores.each do |score|
-      = score.course.name
-      = score.course_score
-      = link_to "编辑",edit_score_path(score)
-      = link_to "删除",score_path(score),:class =>"btn btn-mini",:method => :delete, :confirm => "确定要删除该条目？"
-      %br
-  .row
+    .col-md-1
     .col-md-4
+      %p 一、学生基本情况
+      %table{:class =>"table table-bordered"}
+        %tbody
+          %tr
+            %td= "学号"
+            %td= @user.stuno
+            %td= "姓名"
+            %td= @user.name
+          %tr
+            %td= "年级"
+            %td= @user.grade.name
+            %td= "专业"
+            %td= @user.major
+
+  .row
+    .col-md-1
+    .col-md-4
+      %p 二、课程成绩
+      %table{:class =>"table table-bordered"}
+        %thead
+          %tr
+            %td= "课程"
+            %td= "成绩"
+        %tbody
+          - @user.scores.each do |score|
+            %tr
+              %td= score.course.name
+              %td= score.course_score
+    .col-md-3
+    .col-md-4
+      %p 成绩输入
       = simple_form_for @score do |f|
         = f.association :course,:label=>"课程"
         = f.input :course_score,:label=>"成绩"
         .form-actions
           =f.submit "生成",:disable_with => "正在提交中...",:class =>"btn btn-primary "
 
-    .col-md-8
-
-
-
   .row
-    %p= "科研情况列表"
-    %table
-      %thead
-        %tr
-          %td= "文章标题"
-          %td= "发表刊物"
-          %td= "是否独著"
-          %td= "发表时间"
-          %td= "合著第几作者"
-      %tbody
-        - @user.researches.each do |research|
+    .col-md-1
+    .col-md-10
+      %p 三、科研成果列表
+      %table{:class =>"table table-bordered"}
+        %thead
           %tr
-            %td= research.title
-            %td= research.magazine
-            %td= research.self_write
-            %td= research.publish_time
-            %td= research.author
-            %td= link_to "编辑",edit_research_path(research)
-            %td= link_to "删除",research_path(research),:class =>"btn btn-mini",:method => :delete, :confirm => "确定要删除该条目？"
-  .row
-    .col-md-4
+            %td= "文章标题"
+            %td= "发表刊物"
+            %td= "是否独著"
+            %td= "出版时间"
+            %td= "字数"
+            %td= "合著第几作者"
+        %tbody
+          - @user.researches.each do |research|
+            %tr
+              %td= research.title
+              %td= research.magazine
+              %td= research.self_write
+              %td= research.publish_time
+              %td= research.words_count
+              %td= research.author
+
       =simple_form_for @research do |f|
         =f.input :title,:label => "文章标题"
         =f.input :magazine, :label=>"发表刊物"
@@ -63,4 +81,5 @@
 
         .form-actions
           =f.submit "生成",:disable_with => "正在提交中...",:class =>"btn btn-primary "
+
 

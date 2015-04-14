@@ -60,7 +60,7 @@ class GradesController < ApplicationController
 
   def show
     #@grade = Grade.find(params[:id])
-    @users = @grade.users 
+    @users = @grade.users.order("stuno ASC")
   end
 
   private
