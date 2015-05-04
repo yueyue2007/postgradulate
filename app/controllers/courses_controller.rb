@@ -40,7 +40,7 @@ class CoursesController < ApplicationController
 
   def show
     @score = Score.new
-    @scores = @course.scores.sort_by{|x| x.user.stuno}
+    @scores = @course.scores#.sort_by{|x| x.user.stuno}
     session[:course_id] = @course.id
     session[:stuno] = nil
   end

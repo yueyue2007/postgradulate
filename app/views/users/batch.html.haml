@@ -10,7 +10,7 @@
     .col-md-1
     .col-md-11
       .row
-        =simple_form_for @user.with_blank_researches(2),:url =>batchupgrade_grade_user_path(@grade,@user2) do |f|
+        =simple_form_for @user.with_blank_researches(5),:url =>batchupgrade_grade_user_path(@grade,@user2) do |f|
           %table{:class =>"table table-bordered"}
             %thead
               %tr
