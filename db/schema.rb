@@ -65,6 +65,8 @@ ActiveRecord::Schema.define(version: 20150401142415) do
     t.datetime "updated_at",   null: false
   end
 
+  add_index "scores", ["user_id", "course_id"], name: "index_scores_on_user_id_and_course_id", unique: true
+
   create_table "users", force: :cascade do |t|
     t.string   "name",       null: false
     t.string   "stuno",      null: false

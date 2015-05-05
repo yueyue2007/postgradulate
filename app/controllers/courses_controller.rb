@@ -40,7 +40,10 @@ class CoursesController < ApplicationController
 
   def show
     @score = Score.new
-    @scores = @course.scores#.sort_by{|x| x.user.stuno}
+    @scores = @course.scores.sort_by{|x| x.user.stuno}
+    # if @scores.size >0 
+    #   @scores.sort_by!{|x| x.user.stuno}
+    # end
     session[:course_id] = @course.id
     session[:stuno] = nil
   end
@@ -65,13 +68,30 @@ class CoursesController < ApplicationController
 
   def batchupgrade
     # first delete all the score record of @course,@grade
-    if @course.update(course_params)
-      flash[:success] = "批量输入成功!"
-      redirect_to course_path(@course)
-    else
-      flash[:error] = "批量输入不成功，请检查是否重复？。"
-      redirect_to course_path(@course)
+
+    params[:course][:scores_attributes].each do |score_attribute|
+      score = Score.find_by(user_id:score_attribute[1][:user_id],course_id:@course.id)
+      if score 
+        score.course_score = score_attribute[1][:course_score]
+        score.save!
+        score = nil 
+      else
+        score = Score.new 
+        score.user_id = score_attribute[1][:user_id]
+        score.course = @course 
+        score.course_score = score_attribute[1][:course_score]
+        score.save!
+        score = nil 
+      end      
     end
+    redirect_to course_path(@course)
+    # if @course.update(course_params)
+    #   flash[:success] = "批量输入成功!"
+    #   #redirect_to course_path(@course)
+    # else
+    #   flash[:error] = "批量输入不成功，请检查是否重复？。"
+    #   #redirect_to course_path(@course)
+    # end
   end
 
   private

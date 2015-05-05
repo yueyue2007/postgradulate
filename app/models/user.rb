@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
 
   def score(course)
     if score = Score.find_by(user_id:id,course_id:course.id)
-      score.destroy   # 将已有的分数先删除掉
+      #score.destroy   # 将已有的分数先删除掉
       score.course_score
     else
       0

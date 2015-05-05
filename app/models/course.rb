@@ -11,4 +11,8 @@ class Course < ActiveRecord::Base
     end
     self
   end
+
+  def score(userid)
+    Score.find_by(user_id:userid,course_id:id)
+  end
 end
