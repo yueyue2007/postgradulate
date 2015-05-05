@@ -39,6 +39,8 @@
             %tr
               %td= score.course.name
               %td= score.course_score
+              %td= link_to "修改",edit_score_path(score)
+              %td= link_to "删除",score_path(score),:method => :delete, :confirm => "确定要删除该条记录？"
     .col-md-3
     .col-md-4
       %p 成绩输入
@@ -61,6 +63,7 @@
             %td= "出版时间"
             %td= "字数"
             %td= "合著第几作者"
+            %td= "  "
         %tbody
           - @user.researches.each do |research|
             %tr
@@ -70,6 +73,8 @@
               %td= research.publish_time
               %td= research.words_count
               %td= research.author
+              %td= link_to "修改",edit_research_path(research)
+              %td= link_to "删除",research_path(research),:method => :delete, :confirm => "确定要删除该条记录？"
 
       =simple_form_for @research do |f|
         =f.input :title,:label => "文章标题"
