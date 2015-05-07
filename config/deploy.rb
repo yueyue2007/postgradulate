@@ -1,8 +1,9 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
+SSHKit.config.command_map[:rake] = "bundle exec rake"
 set :application, 'postgradulate'
-set :repo_url, 'git@example.com:me/my_repo.git'
+set :repo_url, 'git@github.com:yueyue2007/postgradulate.git' 
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
