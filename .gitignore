@@ -16,3 +16,7 @@
 !/log/.keep
 /tmp
 /.idea/*
+
+# Ignore secret files 
+/config/database.yml
+/config/secrets.yml
